@@ -31,28 +31,56 @@ final class Date extends Embeddable
     /**
      * @static
      * @access public
-     * @param  \DateTime $dateTime
+     * @param  \DateTime $birthday
      * @return Date
      *
-     * @throws \OutOfRangeException
      * @throws \InvalidArgumentException
+     * @throws \OutOfRangeException
+     * @throws \DomainException
      * @throws \LengthException
      */
-    public static function from(\DateTime $dateTime)
+    public static function fromDateTime(\DateTime $birthday)
     {
+        $date = clone $birthday;
+
         return new self(
-            new Year($dateTime->format('Y')),
-            new Month($dateTime->format('m')),
-            new Day($dateTime->format('d'))
+            new Year($date->format('Y')),
+            new Month($date->format('m')),
+            new Day($date->format('d'))
         );
     }
 
     /**
-     * @param Year  $year
+     * @static
+     * @access public
+     * @param string $date
+     * @param string $format
+     * @return Date
+     *
+     * @throws \InvalidArgumentException
+     * @throws \OutOfRangeException
+     * @throws \DomainException
+     * @throws \LengthException
+     */
+    public static function fromString($date, $format = \DateTime::ATOM)
+    {
+        $dateTime = \DateTime::createFromFormat($format, $date);
+
+        $err = \DateTime::getLastErrors();
+        if ($err['error_count'] > 0) {
+            throw new \InvalidArgumentException(sprintf('%s', implode(', ', $err['errors'])));
+        }
+
+        return self::fromDateTime($dateTime);
+    }
+
+    /**
+     * @param Year $year
      * @param Month $month
-     * @param Day   $day
+     * @param Day $day
      *
      * @throws \OutOfRangeException
+     * @throws \DomainException
      */
     public function __construct(Year $year, Month $month, Day $day)
     {
@@ -63,6 +91,12 @@ final class Date extends Embeddable
         }
 
         $this->dateTime = \DateTime::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $year, $month, $day));
+
+        $err = \DateTime::getLastErrors();
+        if ($err['error_count'] > 0) {
+            throw new \DomainException(sprintf('%s', implode(', ', $err['errors'])));
+        }
+
         $this->year = $year;
         $this->month = $month;
         $this->day = $day;

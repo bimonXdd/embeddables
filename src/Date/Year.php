@@ -18,7 +18,7 @@ final class Year extends Embeddable
      * @param string|int $year
      *
      * @throws \InvalidArgumentException
-     * @throws \LengthException
+     * @throws \LengthException If received value is not a full numeric representation of a year.
      */
     public function __construct($year)
     {

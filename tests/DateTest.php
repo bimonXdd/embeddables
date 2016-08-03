@@ -105,7 +105,7 @@ class DateTest extends TestCase
     {
         $native = \DateTime::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $year, $month, $day));
 
-        $this->assertInstanceOf('Gentle\Embeddable\Date', Date::from($native));
+        $this->assertInstanceOf('Gentle\Embeddable\Date', Date::fromDateTime($native));
     }
 
     /**
