@@ -7,16 +7,13 @@
  */
 namespace Gentle\Embeddable\Date;
 
-use Gentle\Embeddable\EmbeddableInterface;
+use Gentle\Embeddable\Embeddable;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Day implements EmbeddableInterface
+final class Day extends Embeddable
 {
-    /** @var string */
-    private $value;
-
     /**
      * @param string|int $day
      *
@@ -45,23 +42,8 @@ final class Day implements EmbeddableInterface
     /**
      * {@inheritDoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         return get_class($object) === 'Gentle\Embeddable\Date\Day' && $this->value === (string)$object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function __toString()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }

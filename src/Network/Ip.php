@@ -7,16 +7,13 @@
  */
 namespace Gentle\Embeddable\Network;
 
-use Gentle\Embeddable\EmbeddableInterface;
+use Gentle\Embeddable\Embeddable;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Ip implements EmbeddableInterface
+final class Ip extends Embeddable
 {
-    /** @var string */
-    private $value;
-
     /** @var int */
     private $version = 4;
 
@@ -42,7 +39,7 @@ final class Ip implements EmbeddableInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         return get_class($object) === 'Gentle\Embeddable\Network\Ip' && $this->value === (string)$object;
     }
@@ -170,12 +167,5 @@ final class Ip implements EmbeddableInterface
         }
 
         return current(unpack('a16', inet_pton($this->value)));
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }

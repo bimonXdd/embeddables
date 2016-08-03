@@ -7,16 +7,13 @@
  */
 namespace Gentle\Embeddable\Time;
 
-use Gentle\Embeddable\EmbeddableInterface;
+use Gentle\Embeddable\Embeddable;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Minutes implements EmbeddableInterface
+final class Minutes extends Embeddable
 {
-    /** @var string */
-    private $value;
-
     /**
      * @param string|int $value
      *
@@ -45,23 +42,8 @@ final class Minutes implements EmbeddableInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         return get_class($object) === 'Gentle\Embeddable\Time\Minutes' && $this->value === (string)$object;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }

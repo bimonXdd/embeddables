@@ -14,7 +14,7 @@ use Gentle\Embeddable\Date\Year;
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Date implements EmbeddableInterface
+final class Date extends Embeddable
 {
     /** @var Year */
     private $year;
@@ -71,7 +71,7 @@ final class Date implements EmbeddableInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         /* @var Date $object */
         return get_class($object) === 'Gentle\Embeddable\Date' &&
@@ -138,12 +138,5 @@ final class Date implements EmbeddableInterface
     private function getDaysInMonth(Month $month, Year $year)
     {
         return (int)date('t', mktime(0, 0, 0, (string) $month, 1, (string) $year));
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }

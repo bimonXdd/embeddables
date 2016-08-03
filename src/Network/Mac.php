@@ -7,16 +7,13 @@
  */
 namespace Gentle\Embeddable\Network;
 
-use Gentle\Embeddable\EmbeddableInterface;
+use Gentle\Embeddable\Embeddable;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Mac implements EmbeddableInterface
+final class Mac extends Embeddable
 {
-    /** @var string */
-    private $value;
-
     /**
      * @param string $value
      *
@@ -38,23 +35,8 @@ final class Mac implements EmbeddableInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         return get_class($object) === 'Gentle\Embeddable\Network\Mac' && $this->value === (string)$object;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }

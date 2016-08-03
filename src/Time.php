@@ -14,7 +14,7 @@ use Gentle\Embeddable\Time\Seconds;
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Time implements EmbeddableInterface
+final class Time extends Embeddable
 {
     /** @var Hour */
     private $hour;
@@ -90,7 +90,7 @@ final class Time implements EmbeddableInterface
     /**
      * {@inheritdoc}
      */
-    public function equals(EmbeddableInterface $object)
+    public function equals(Embeddable $object)
     {
         /* @var Time $object */
         return get_class($object) === 'Gentle\Embeddable\Time' &&
@@ -144,12 +144,5 @@ final class Time implements EmbeddableInterface
     public function asDateTime()
     {
         return $this->dateTime;
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    private function __clone()
-    {
     }
 }
