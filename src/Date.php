@@ -92,10 +92,12 @@ final class Date extends Embeddable
 
         $this->dateTime = \DateTime::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $year, $month, $day));
 
+        // @codeCoverageIgnoreStart
         $err = \DateTime::getLastErrors();
         if ($err['error_count'] > 0) {
             throw new \DomainException(sprintf('%s', implode(', ', $err['errors'])));
         }
+        // @codeCoverageIgnoreStop
 
         $this->year = $year;
         $this->month = $month;

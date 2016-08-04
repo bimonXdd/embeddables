@@ -35,6 +35,15 @@ class DateTest extends TestCase
         $this->assertInstanceOf('Gentle\Embeddable\Date', $date);
     }
 
+    public function testInstantiateFromString()
+    {
+        $date = Date::fromString('2009-11-04T19:55:41Z');
+        $this->assertInstanceOf('Gentle\Embeddable\Date', $date);
+
+        $this->setExpectedException('InvalidArgumentException');
+        Date::fromString('2009-11-04T19:55');
+    }
+
     /**
      * @param $year
      * @param $month
