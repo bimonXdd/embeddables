@@ -3,7 +3,7 @@
     "type":         "library",
     "description":  "Small collection of value objects.",
     "homepage":     "http://www.gentle.ro",
-    "keywords":     ["value-objects", "composite"],
+    "keywords":     ["value-objects", "composition", "immutable"],
     "license":      "MIT",
     "authors": [
         {
