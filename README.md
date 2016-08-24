@@ -40,10 +40,6 @@ $time = $time->withTimeZone(new \DateTimeZone('Europe/Monaco'));
 echo (string)$time; // 23:04:14
 ```
 
-## Documentation
-
-See the [docs](docs) directory for details.
-
 ## Testing
 
 ``` bash
