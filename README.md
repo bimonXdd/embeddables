@@ -31,8 +31,8 @@ echo (string)$date; // 2016-12-25
 
 $time = new Time(
     new Time\Hour(23),
-    new Time\Minutes('04'),
-    new Time\Seconds(14)
+    new Time\Minute('04'),
+    new Time\Second(14)
 );
 
 // changing timezone will return a new `Time` object
