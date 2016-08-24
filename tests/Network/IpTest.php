@@ -156,8 +156,8 @@ class IpTest extends TestCase
         return [
             // Format: version, expanded, alternate, condensed, hex, long, base64 encoded binary
             'ipv4 localhost'        => [4, '127.0.0.1', '127.0.0.1', '127.0.0.1', '0x7f000001', '2130706433', 'AAAAAAAAAAAAAAAAfwAAAQ=='],
-            'ipv4 class C'          => [4, '192.168.1.4', '192.168.1.4', '192.168.1.4', '0xC0A80104', '3232235780', 'AAAAAAAAAAAAAAAAwKgBBA=='],
-            'ipv6 localhost'        => [6, '0000:0000:0000:0000:0000:0000:0000:0001', '0:0:0:0:0:0:0:1', '::1', '0x1', '1', 'AAAAAAAAAAAAAAAAAAAAAQ=='],
+            'ipv4 class C'          => [4, '192.168.1.4', '192.168.1.4', '192.168.1.4', '0xc0a80104', '3232235780', 'AAAAAAAAAAAAAAAAwKgBBA=='],
+            'ipv6 localhost'        => [6, '0000:0000:0000:0000:0000:0000:0000:0001', '0:0:0:0:0:0:0:1', '::1', '0x00000000000000000000000000000001', '1', 'AAAAAAAAAAAAAAAAAAAAAQ=='],
             'ipv6 google dns#1'     => [
                 6,
                 '2001:4860:4860:0000:0000:0000:0000:8888',
