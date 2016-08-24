@@ -9,9 +9,8 @@ namespace Gentle\Embeddable\Test;
 
 use Gentle\Embeddable\Time;
 use Gentle\Embeddable\Time\Hour;
-use Gentle\Embeddable\Time\Minutes;
-use Gentle\Embeddable\Time\Seconds;
-use Gentle\Embeddable\Test\TestCase;
+use Gentle\Embeddable\Time\Minute;
+use Gentle\Embeddable\Time\Second;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
@@ -29,8 +28,8 @@ class TimeTest extends TestCase
     {
         $time = new Time(
             new Hour($hour),
-            new Minutes($minutes),
-            new Seconds($seconds)
+            new Minute($minutes),
+            new Second($seconds)
         );
 
         $this->assertInstanceOf('Gentle\Embeddable\Time', $time);
@@ -45,7 +44,7 @@ class TimeTest extends TestCase
      */
     public function testTimezoneChange($hour, $minutes, $seconds)
     {
-        $time1 = new Time(new Hour($hour), new Minutes($minutes), new Seconds($seconds));
+        $time1 = new Time(new Hour($hour), new Minute($minutes), new Second($seconds));
         $this->assertEquals(date_default_timezone_get(), $time1->asDateTime()->getTimezone()->getName());
 
         $random = $this->getRandomTimeZone();
@@ -77,8 +76,8 @@ class TimeTest extends TestCase
     {
         new Time(
             new Hour($hour),
-            new Minutes($minutes),
-            new Seconds($seconds)
+            new Minute($minutes),
+            new Second($seconds)
         );
     }
 
@@ -93,14 +92,14 @@ class TimeTest extends TestCase
     {
         $expected = new Time(
             new Hour($hour),
-            new Minutes($minutes),
-            new Seconds($seconds)
+            new Minute($minutes),
+            new Second($seconds)
         );
 
         $actual = new Time(
             new Hour($hour),
-            new Minutes($minutes),
-            new Seconds($seconds)
+            new Minute($minutes),
+            new Second($seconds)
         );
 
         $this->assertTrue($expected->equals($actual));
@@ -118,8 +117,8 @@ class TimeTest extends TestCase
     {
         $time = new Time(
             new Hour($hour),
-            new Minutes($minutes),
-            new Seconds($seconds)
+            new Minute($minutes),
+            new Second($seconds)
         );
 
         $this->assertEquals((string)$time, $time->asDateTime()->format('H:i:s'));

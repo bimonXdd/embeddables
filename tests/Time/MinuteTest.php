@@ -7,13 +7,13 @@
  */
 namespace Gentle\Embeddable\Test\Time;
 
-use Gentle\Embeddable\Time\Minutes;
+use Gentle\Embeddable\Time\Minute;
 use Gentle\Embeddable\Test\TestCase;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-class MinutesTest extends TestCase
+class MinuteTest extends TestCase
 {
     /**
      * @param string|int $value
@@ -22,8 +22,8 @@ class MinutesTest extends TestCase
      */
     public function testInstantiateSuccess($value)
     {
-        $minutes = new Minutes($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Time\Minutes', $minutes);
+        $minutes = new Minute($value);
+        $this->assertInstanceOf('Gentle\Embeddable\Time\Minute', $minutes);
     }
 
     /**
@@ -34,7 +34,7 @@ class MinutesTest extends TestCase
      */
     public function testInstantiateError($value)
     {
-        new Minutes($value);
+        new Minute($value);
     }
 
     /**
@@ -45,7 +45,7 @@ class MinutesTest extends TestCase
      */
     public function testMinutesRangeError($value)
     {
-        new Minutes($value);
+        new Minute($value);
     }
 
     /**
@@ -55,8 +55,8 @@ class MinutesTest extends TestCase
      */
     public function testEqualityByValue($value)
     {
-        $minutes1 = new Minutes($value);
-        $minutes2 = new Minutes($value);
+        $minutes1 = new Minute($value);
+        $minutes2 = new Minute($value);
 
         $this->assertTrue($minutes1->equals($minutes2));
         $this->assertNotSame($minutes1, $minutes2);

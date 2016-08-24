@@ -8,8 +8,8 @@
 namespace Gentle\Embeddable;
 
 use Gentle\Embeddable\Time\Hour;
-use Gentle\Embeddable\Time\Minutes;
-use Gentle\Embeddable\Time\Seconds;
+use Gentle\Embeddable\Time\Minute;
+use Gentle\Embeddable\Time\Second;
 
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
@@ -19,10 +19,10 @@ final class Time extends Embeddable
     /** @var Hour */
     private $hour;
 
-    /** @var Minutes */
+    /** @var Minute */
     private $minutes;
 
-    /** @var Seconds */
+    /** @var Second */
     private $seconds;
 
     /** @var \DateTime */
@@ -42,19 +42,19 @@ final class Time extends Embeddable
     {
         return new self(
             new Hour($dateTime->format('H')),
-            new Minutes($dateTime->format('i')),
-            new Seconds($dateTime->format('s'))
+            new Minute($dateTime->format('i')),
+            new Second($dateTime->format('s'))
         );
     }
 
     /**
      * @param Hour    $hour
-     * @param Minutes $minutes
-     * @param Seconds $seconds
+     * @param Minute $minutes
+     * @param Second $seconds
      *
      * @throws \OutOfRangeException
      */
-    public function __construct(Hour $hour, Minutes $minutes, Seconds $seconds)
+    public function __construct(Hour $hour, Minute $minutes, Second $seconds)
     {
         $this->dateTime = \DateTime::createFromFormat(
             'H:i:s',
@@ -82,8 +82,8 @@ final class Time extends Embeddable
 
         return new self(
             new Hour((string)$this->getHour()),
-            new Minutes((string)$this->getMinutes()),
-            new Seconds((string)$this->getSeconds())
+            new Minute((string)$this->getMinutes()),
+            new Second((string)$this->getSeconds())
         );
     }
 
@@ -121,7 +121,7 @@ final class Time extends Embeddable
 
     /**
      * @access public
-     * @return Minutes
+     * @return Minute
      */
     public function getMinutes()
     {
@@ -130,7 +130,7 @@ final class Time extends Embeddable
 
     /**
      * @access public
-     * @return Seconds
+     * @return Second
      */
     public function getSeconds()
     {

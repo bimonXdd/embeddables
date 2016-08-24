@@ -12,7 +12,7 @@ use Gentle\Embeddable\Embeddable;
 /**
  * @author Alexandru Guzinschi <alex@gentle.ro>
  */
-final class Minutes extends Embeddable
+final class Minute extends Embeddable
 {
     /**
      * @param string|int $value
@@ -44,6 +44,6 @@ final class Minutes extends Embeddable
      */
     public function equals(Embeddable $object)
     {
-        return get_class($object) === 'Gentle\Embeddable\Time\Minutes' && $this->value === (string)$object;
+        return get_class($object) === 'Gentle\Embeddable\Time\Minute' && $this->value === (string)$object;
     }
 }
