@@ -32,7 +32,7 @@ final class Time extends Embeddable
      * @static
      * @access public
      * @param  \DateTime $dateTime
-     * @return Date
+     * @return Time
      *
      * @throws \OutOfRangeException
      * @throws \InvalidArgumentException

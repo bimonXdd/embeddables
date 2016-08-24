@@ -173,6 +173,6 @@ final class Date extends Embeddable
      */
     private function getDaysInMonth(Month $month, Year $year)
     {
-        return (int)date('t', mktime(0, 0, 0, (string) $month, 1, (string) $year));
+        return (int)date('t', mktime(0, 0, 0, (string)$month, 1, (string)$year));
     }
 }
