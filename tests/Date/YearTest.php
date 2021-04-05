@@ -20,20 +20,20 @@ class YearTest extends TestCase
      *
      * @dataProvider validYearProvider
      */
-    public function testInstantiateSuccess($value)
+    public function testInstantiateSuccess($value): void
     {
         $year = new Year($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Date\Year', $year);
+        $this->assertInstanceOf(Year::class, $year);
     }
 
     /**
      * @param string|int $value
      *
      * @dataProvider invalidYearProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInstantiateError($value)
+    public function testInstantiateError($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Year($value);
     }
 
@@ -41,10 +41,10 @@ class YearTest extends TestCase
      * @param string|int $value
      *
      * @dataProvider invalidYearLengthProvider
-     * @expectedException \LengthException
      */
-    public function testLenghtError($value)
+    public function testLenghtError($value): void
     {
+        $this->expectException(\LengthException::class);
         new Year($value);
     }
 
@@ -53,7 +53,7 @@ class YearTest extends TestCase
      *
      * @dataProvider validYearProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $year1 = new Year($value);
         $year2 = new Year($value);
@@ -65,7 +65,7 @@ class YearTest extends TestCase
     /**
      * @return array
      */
-    public function validYearProvider()
+    public function validYearProvider(): array
     {
         return [
             ['2014'], [1893], ['1981'], ['0129'], ['0041'], ['0001']
@@ -75,14 +75,14 @@ class YearTest extends TestCase
     /**
      * @return array
      */
-    public function invalidYearProvider()
+    public function invalidYearProvider(): array
     {
         return [
             ['24a9'], ['aa4b'], ['not valid'], ['43.12'], ['14.1'], ['43,01'], [new \stdClass()], ['4321a'], [['3412']],
         ];
     }
 
-    public function invalidYearLengthProvider()
+    public function invalidYearLengthProvider(): array
     {
         return [
             [999], [41], [3], ['014'], ['24'], ['1']

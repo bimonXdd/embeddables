@@ -18,7 +18,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testValidIp($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testValidIp($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertInstanceOf('Gentle\Embeddable\Network\Ip', $obj);
@@ -28,7 +28,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testVersion($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testVersion($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($alternate);
         $this->assertEquals($version, $obj->getVersion());
@@ -37,7 +37,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testEqualityByValue($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testEqualityByValue($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj1 = new Ip($expanded);
         $obj2 = new Ip($condensed);
@@ -47,17 +47,18 @@ class IpTest extends TestCase
 
     /**
      * @dataProvider invalidIpProvider
-     * @expectedException \InvalidArgumentException
+     * @param $value
      */
-    public function testInvalidIp($value)
+    public function testInvalidIp($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Ip($value);
     }
 
     /**
      * @dataProvider validProvider
      */
-    public function testToLongConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testToLongConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals($long, $obj->toLong());
@@ -72,7 +73,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testToHexConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testToHexConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals($hex, $obj->toHex());
@@ -87,7 +88,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testToBinaryConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testToBinaryConversion($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals($binary, base64_encode($obj->toBinary()));
@@ -102,7 +103,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testExpand($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testExpand($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals(strtolower($expanded), $obj->getExpanded());
@@ -117,7 +118,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testAlternate($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testAlternate($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals(strtolower($alternate), $obj->getAlternate());
@@ -132,7 +133,7 @@ class IpTest extends TestCase
     /**
      * @dataProvider validProvider
      */
-    public function testCondensed($version, $expanded, $alternate, $condensed, $hex, $long, $binary)
+    public function testCondensed($version, $expanded, $alternate, $condensed, $hex, $long, $binary): void
     {
         $obj = new Ip($expanded);
         $this->assertEquals(strtolower($condensed), $obj->getCondensed());
@@ -151,7 +152,7 @@ class IpTest extends TestCase
      *
      * @return array
      */
-    public function validProvider()
+    public function validProvider(): array
     {
         return [
             // Format: version, expanded, alternate, condensed, hex, long, base64 encoded binary
@@ -200,7 +201,7 @@ class IpTest extends TestCase
     /**
      * @return array
      */
-    public function invalidIpProvider()
+    public function invalidIpProvider(): array
     {
         return [
             [new \stdClass()], ['43'], ['21.3'], ['4,21'], [[]], ['not ip'], [2], [41], ['127.0.0'], ['192.1'],

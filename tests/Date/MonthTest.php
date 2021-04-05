@@ -20,20 +20,20 @@ class MonthTest extends TestCase
      *
      * @dataProvider validMonthProvider
      */
-    public function testInstantiateSuccess($value)
+    public function testInstantiateSuccess($value): void
     {
         $month = new Month($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Date\Month', $month);
+        $this->assertInstanceOf(Month::class, $month);
     }
 
     /**
      * @param string|int $value
      *
      * @dataProvider invalidMonthProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInstantiateError($value)
+    public function testInstantiateError($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Month($value);
     }
 
@@ -41,10 +41,10 @@ class MonthTest extends TestCase
      * @param string|int $value
      *
      * @dataProvider invalidMonthRangeProvider
-     * @expectedException \OutOfRangeException
      */
-    public function testMonthRangeError($value)
+    public function testMonthRangeError($value): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Month($value);
     }
 
@@ -53,7 +53,7 @@ class MonthTest extends TestCase
      *
      * @dataProvider validMonthProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $month1 = new Month($value);
         $month2 = new Month($value);
@@ -65,7 +65,7 @@ class MonthTest extends TestCase
     /**
      * @return array
      */
-    public function validMonthProvider()
+    public function validMonthProvider(): array
     {
         return [
             ['04'], [2], ['12'], ['8'], ['09']
@@ -75,14 +75,14 @@ class MonthTest extends TestCase
     /**
      * @return array
      */
-    public function invalidMonthProvider()
+    public function invalidMonthProvider(): array
     {
         return [
             ['aa4b'], ['not valid'], ['43.12'], ['14.1'], ['43,01'], [new \stdClass()], ['4321a'], [['3412']],
         ];
     }
 
-    public function invalidMonthRangeProvider()
+    public function invalidMonthRangeProvider(): array
     {
         return [
             [999], [312], ['014'], ['24'], ['100']
