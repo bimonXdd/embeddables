@@ -5,6 +5,10 @@ php:
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 env:
   global:
     - XDEBUG_MODE=coverage
@@ -14,7 +18,7 @@ matrix:
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
 
 script:
   - mkdir -p build/logs
