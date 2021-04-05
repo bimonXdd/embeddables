@@ -7,13 +7,11 @@
  */
 namespace Gentle\Embeddable\Test;
 
-use PHPUnit_Framework_TestCase;
-
-abstract class TestCase extends PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    private static $cloneCache = [];
+    private static array $cloneCache = [];
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->autoCheckCloning(
             str_replace(array('Test\\', 'Test'), '', get_class($this))
@@ -21,14 +19,15 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Automaticaly check each class if is clonable.
+     * Automatically check each class if is clonable.
      *
      * This is used as a method to enforce no cloning rule for any
      * future objects.
      *
      * @param string $class
+     * @throws \ReflectionException
      */
-    private function autoCheckCloning($class)
+    private function autoCheckCloning(string $class): void
     {
         if (!in_array($class, self::$cloneCache, false)) {
             self::$cloneCache[] = $class;
@@ -40,8 +39,9 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
      * Make sure the `__clone` method is not part of the public API.
      *
      * @param string $class
+     * @throws \ReflectionException
      */
-    protected function assertObjectCantBeCloned($class)
+    protected function assertObjectCantBeCloned(string $class): void
     {
         $ref = new \ReflectionClass($class);
         if (false !== $ref->isCloneable()) {

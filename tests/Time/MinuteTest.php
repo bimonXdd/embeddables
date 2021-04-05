@@ -20,20 +20,20 @@ class MinuteTest extends TestCase
      *
      * @dataProvider validMinutesProvider
      */
-    public function testInstantiateSuccess($value)
+    public function testInstantiateSuccess($value): void
     {
         $minutes = new Minute($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Time\Minute', $minutes);
+        $this->assertInstanceOf(Minute::class, $minutes);
     }
 
     /**
      * @param string|int $value
      *
      * @dataProvider invalidMinutesProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInstantiateError($value)
+    public function testInstantiateError($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Minute($value);
     }
 
@@ -41,10 +41,10 @@ class MinuteTest extends TestCase
      * @param string|int $value
      *
      * @dataProvider invalidMinutesRangeProvider
-     * @expectedException \OutOfRangeException
      */
-    public function testMinutesRangeError($value)
+    public function testMinutesRangeError($value): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Minute($value);
     }
 
@@ -53,7 +53,7 @@ class MinuteTest extends TestCase
      *
      * @dataProvider validMinutesProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $minutes1 = new Minute($value);
         $minutes2 = new Minute($value);
@@ -65,7 +65,7 @@ class MinuteTest extends TestCase
     /**
      * @return array
      */
-    public function validMinutesProvider()
+    public function validMinutesProvider(): array
     {
         return [
             ['04'], [2], ['12'], ['8'], ['09'], ['00'], [0]
@@ -75,14 +75,14 @@ class MinuteTest extends TestCase
     /**
      * @return array
      */
-    public function invalidMinutesProvider()
+    public function invalidMinutesProvider(): array
     {
         return [
             ['aa4b'], ['not valid'], ['43.12'], ['14.1'], ['43,01'], [new \stdClass()], ['4321a'], [['3412']], ['3.14']
         ];
     }
 
-    public function invalidMinutesRangeProvider()
+    public function invalidMinutesRangeProvider(): array
     {
         return [
             [999], [312], ['034'], ['100'], [60], ['61']

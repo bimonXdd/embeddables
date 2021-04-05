@@ -20,20 +20,20 @@ class DayTest extends TestCase
      *
      * @dataProvider validDayProvider
      */
-    public function testInstantiateSuccess($value)
+    public function testInstantiateSuccess($value): void
     {
         $day = new Day($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Date\Day', $day);
+        $this->assertInstanceOf(Day::class, $day);
     }
 
     /**
      * @param string|int $value
      *
      * @dataProvider invalidDayProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInstantiateError($value)
+    public function testInstantiateError($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Day($value);
     }
 
@@ -41,10 +41,10 @@ class DayTest extends TestCase
      * @param string|int $value
      *
      * @dataProvider invalidDayRangeProvider
-     * @expectedException \OutOfRangeException
      */
-    public function testDayRangeError($value)
+    public function testDayRangeError($value): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Day($value);
     }
 
@@ -53,7 +53,7 @@ class DayTest extends TestCase
      *
      * @dataProvider validDayProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $day1 = new Day($value);
         $day2 = new Day($value);
@@ -65,7 +65,7 @@ class DayTest extends TestCase
     /**
      * @return array
      */
-    public function validDayProvider()
+    public function validDayProvider(): array
     {
         return [
             ['04'], [2], ['12'], ['8'], ['09'], ['31'], [29], ['013']
@@ -75,14 +75,14 @@ class DayTest extends TestCase
     /**
      * @return array
      */
-    public function invalidDayProvider()
+    public function invalidDayProvider(): array
     {
         return [
             ['aa4b'], ['not valid'], ['43.12'], ['14.1'], ['43,01'], [new \stdClass()], ['4321a'], [['3412']]
         ];
     }
 
-    public function invalidDayRangeProvider()
+    public function invalidDayRangeProvider(): array
     {
         return [
             [999], [312], ['41'], ['32'], ['100']

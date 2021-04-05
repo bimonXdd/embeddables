@@ -20,20 +20,20 @@ class SecondTest extends TestCase
      *
      * @dataProvider validSecondsProvider
      */
-    public function testInstantiateSuccess($value)
+    public function testInstantiateSuccess($value): void
     {
         $seconds = new Second($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Time\Second', $seconds);
+        $this->assertInstanceOf(Second::class, $seconds);
     }
 
     /**
      * @param string|int $value
      *
      * @dataProvider invalidSecondsProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInstantiateError($value)
+    public function testInstantiateError($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Second($value);
     }
 
@@ -41,10 +41,10 @@ class SecondTest extends TestCase
      * @param string|int $value
      *
      * @dataProvider invalidSecondsRangeProvider
-     * @expectedException \OutOfRangeException
      */
-    public function testSecondsRangeError($value)
+    public function testSecondsRangeError($value): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Second($value);
     }
 
@@ -53,7 +53,7 @@ class SecondTest extends TestCase
      *
      * @dataProvider validSecondsProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $seconds1 = new Second($value);
         $seconds2 = new Second($value);
@@ -65,7 +65,7 @@ class SecondTest extends TestCase
     /**
      * @return array
      */
-    public function validSecondsProvider()
+    public function validSecondsProvider(): array
     {
         return [
             ['04'], [2], ['12'], ['8'], ['09'], ['00'], [0]
@@ -75,14 +75,14 @@ class SecondTest extends TestCase
     /**
      * @return array
      */
-    public function invalidSecondsProvider()
+    public function invalidSecondsProvider(): array
     {
         return [
             ['aa4b'], ['not valid'], ['43.12'], ['14.1'], ['43,01'], [new \stdClass()], ['4321a'], [['3412']], ['3.14']
         ];
     }
 
-    public function invalidSecondsRangeProvider()
+    public function invalidSecondsRangeProvider(): array
     {
         return [
             [999], [312], ['034'], ['100'], [60], ['61']

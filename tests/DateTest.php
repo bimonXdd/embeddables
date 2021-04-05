@@ -24,7 +24,7 @@ class DateTest extends TestCase
      *
      * @dataProvider validDatesProvider
      */
-    public function testInstantiateSuccess($year, $month, $day)
+    public function testInstantiateSuccess($year, $month, $day): void
     {
         $date = new Date(
             new Year($year),
@@ -32,15 +32,15 @@ class DateTest extends TestCase
             new Day($day)
         );
 
-        $this->assertInstanceOf('Gentle\Embeddable\Date', $date);
+        $this->assertInstanceOf(Date::class, $date);
     }
 
-    public function testInstantiateFromString()
+    public function testInstantiateFromString(): void
     {
         $date = Date::fromString('2009-11-04T19:55:41Z');
-        $this->assertInstanceOf('Gentle\Embeddable\Date', $date);
+        $this->assertInstanceOf(Date::class, $date);
 
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(\InvalidArgumentException::class);
         Date::fromString('2009-11-04T19:55');
     }
 
@@ -49,11 +49,11 @@ class DateTest extends TestCase
      * @param $month
      * @param $day
      *
-     * @dataProvider invalidDayRangeError
-     * @expectedException \OutOfRangeException
+     * @dataProvider invalidDateRangeError
      */
-    public function testDayRangeError($year, $month, $day)
+    public function testDayRangeError($year, $month, $day): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Date(
             new Year($year),
             new Month($month),
@@ -68,7 +68,7 @@ class DateTest extends TestCase
      *
      * @dataProvider validDatesProvider
      */
-    public function testEqualityByValue($year, $month, $day)
+    public function testEqualityByValue($year, $month, $day): void
     {
         $expected = new Date(
             new Year($year),
@@ -92,7 +92,7 @@ class DateTest extends TestCase
      *
      * @dataProvider validDatesProvider
      */
-    public function testNativeDateTime($year, $month, $day)
+    public function testNativeDateTime($year, $month, $day): void
     {
         $date = new Date(
             new Year($year),
@@ -110,17 +110,17 @@ class DateTest extends TestCase
      *
      * @dataProvider validDatesProvider
      */
-    public function testFromNativeDateTimeSuccess($year, $month, $day)
+    public function testFromNativeDateTimeSuccess($year, $month, $day): void
     {
         $native = \DateTime::createFromFormat('Y-m-d', sprintf('%s-%s-%s', $year, $month, $day));
 
-        $this->assertInstanceOf('Gentle\Embeddable\Date', Date::fromDateTime($native));
+        $this->assertInstanceOf(Date::class, Date::fromDateTime($native));
     }
 
     /**
      * @return array
      */
-    public function validDatesProvider()
+    public function validDatesProvider(): array
     {
         return [
             [2015, 3, 21],
@@ -134,7 +134,7 @@ class DateTest extends TestCase
     /**
      * @return array
      */
-    public function invalidDayRangeError()
+    public function invalidDateRangeError(): array
     {
         return [
             [2015, 2, 31],

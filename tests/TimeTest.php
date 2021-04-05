@@ -24,7 +24,7 @@ class TimeTest extends TestCase
      *
      * @dataProvider validTimeProvider
      */
-    public function testInstantiateSuccess($hour, $minutes, $seconds)
+    public function testInstantiateSuccess($hour, $minutes, $seconds): void
     {
         $time = new Time(
             new Hour($hour),
@@ -32,7 +32,7 @@ class TimeTest extends TestCase
             new Second($seconds)
         );
 
-        $this->assertInstanceOf('Gentle\Embeddable\Time', $time);
+        $this->assertInstanceOf(Time::class, $time);
     }
 
     /**
@@ -42,7 +42,7 @@ class TimeTest extends TestCase
      *
      * @dataProvider validTimeProvider
      */
-    public function testTimezoneChange($hour, $minutes, $seconds)
+    public function testTimezoneChange($hour, $minutes, $seconds): void
     {
         $time1 = new Time(new Hour($hour), new Minute($minutes), new Second($seconds));
         $this->assertEquals(date_default_timezone_get(), $time1->asDateTime()->getTimezone()->getName());
@@ -57,7 +57,7 @@ class TimeTest extends TestCase
     /**
      * @return string
      */
-    private function getRandomTimeZone()
+    private function getRandomTimeZone(): string
     {
         $timezones = array_values(\DateTimeZone::listIdentifiers());
 
@@ -70,10 +70,10 @@ class TimeTest extends TestCase
      * @param $seconds
      *
      * @dataProvider invalidTimeSegmentsRangeErrorProvider
-     * @expectedException \OutOfRangeException
      */
-    public function testRangeError($hour, $minutes, $seconds)
+    public function testRangeError($hour, $minutes, $seconds): void
     {
+        $this->expectException(\OutOfRangeException::class);
         new Time(
             new Hour($hour),
             new Minute($minutes),
@@ -88,7 +88,7 @@ class TimeTest extends TestCase
      *
      * @dataProvider validTimeProvider
      */
-    public function testEqualityByValue($hour, $minutes, $seconds)
+    public function testEqualityByValue($hour, $minutes, $seconds): void
     {
         $expected = new Time(
             new Hour($hour),
@@ -113,7 +113,7 @@ class TimeTest extends TestCase
      *
      * @dataProvider validTimeProvider
      */
-    public function testNativeDateTime($hour, $minutes, $seconds)
+    public function testNativeDateTime($hour, $minutes, $seconds): void
     {
         $time = new Time(
             new Hour($hour),
@@ -131,7 +131,7 @@ class TimeTest extends TestCase
      *
      * @dataProvider validTimeProvider
      */
-    public function testFromNativeDateTime($hour, $minutes, $seconds)
+    public function testFromNativeDateTime($hour, $minutes, $seconds): void
     {
         $native = \DateTime::createFromFormat(
             'H:i:s',
@@ -143,13 +143,13 @@ class TimeTest extends TestCase
             )
         );
 
-        $this->assertInstanceOf('Gentle\Embeddable\Time', Time::from($native));
+        $this->assertInstanceOf(Time::class, Time::from($native));
     }
 
     /**
      * @return array
      */
-    public function validTimeProvider()
+    public function validTimeProvider(): array
     {
         return [
             [02, 3, 21],
@@ -164,7 +164,7 @@ class TimeTest extends TestCase
     /**
      * @return array
      */
-    public function invalidTimeSegmentsRangeErrorProvider()
+    public function invalidTimeSegmentsRangeErrorProvider(): array
     {
         return [
             ['00', '00', 60],

@@ -18,17 +18,17 @@ class MacTest extends TestCase
     /**
      * @dataProvider validMacProvider
      */
-    public function testValidMac($value)
+    public function testValidMac($value): void
     {
         $obj = new Mac($value);
-        $this->assertInstanceOf('Gentle\Embeddable\Network\Mac', $obj);
+        $this->assertInstanceOf(Mac::class, $obj);
         $this->assertEquals($value, (string)$obj);
     }
 
     /**
      * @dataProvider validMacProvider
      */
-    public function testEqualityByValue($value)
+    public function testEqualityByValue($value): void
     {
         $obj1 = new Mac($value);
         $obj2 = new Mac($value);
@@ -38,17 +38,17 @@ class MacTest extends TestCase
 
     /**
      * @dataProvider invalidMacProvider
-     * @expectedException \InvalidArgumentException
      */
-    public function testInvalidMac($value)
+    public function testInvalidMac($value): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Mac($value);
     }
 
     /**
      * @return array
      */
-    public function validMacProvider()
+    public function validMacProvider(): array
     {
         return [
             'IEEE 802' => ['01-23-45-67-89-ab'],
@@ -60,7 +60,7 @@ class MacTest extends TestCase
     /**
      * @return array
      */
-    public function invalidMacProvider()
+    public function invalidMacProvider(): array
     {
         return [
             [new \stdClass()], ['43'], ['21.3'], ['4,21'], [[]], ['not mac'], [2], [41], ['127.0.0.1'], ['192.168.1.4'],

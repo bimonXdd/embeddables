@@ -3,8 +3,8 @@
 [![Latest Version](https://img.shields.io/packagist/v/gentle/embeddables.svg?style=flat-square)](https://packagist.org/packages/gentle/embeddables)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Build Status](https://img.shields.io/travis/gentlero/embeddables/master.svg?style=flat-square)](https://travis-ci.org/gentlero/embeddables)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/b/gentlero/embeddables.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/embeddables/?branch=master)
-[![Code quality](https://img.shields.io/scrutinizer/b/gentlero/embeddables.svg?style=flat-square)](https://scrutinizer-ci.com/b/gentlero/embeddables/?branch=master)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/gentlero/embeddables.svg?style=flat-square)](https://scrutinizer-ci.com/g/gentlero/embeddables/?branch=develop)
+[![Code quality](https://img.shields.io/scrutinizer/g/gentlero/embeddables.svg?style=flat-square)](https://scrutinizer-ci.com/g/gentlero/embeddables/?branch=develop)
 
 Small collection of Value Objects to ease composition.
 
