@@ -5,6 +5,10 @@ php:
 
 sudo: false
 
+env:
+  global:
+    - XDEBUG_MODE=coverage
+
 matrix:
   fast_finish: true
 
