@@ -94,7 +94,7 @@ final class Date extends Embeddable
 
         // @codeCoverageIgnoreStart
         $err = \DateTime::getLastErrors();
-        if ($err['error_count'] > 0) {
+        if ($err !== false && $err['error_count'] > 0) {
             throw new \DomainException(sprintf('%s', implode(', ', $err['errors'])));
         }
         // @codeCoverageIgnoreStop
